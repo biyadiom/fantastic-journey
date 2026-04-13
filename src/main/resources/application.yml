@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: fantastic-journey
+  ai:
+    ollama:
+      # Ollama sur Windows, Spring dans WSL : localhost WSL != Ollama ; IP hôte Windows (vEthernet).
+      # Surcharge : export OLLAMA_BASE_URL=http://<ip>:11434 si cette IP change au redemarrage.
+      base-url: ${OLLAMA_BASE_URL:http://172.19.224.1:11434}
+      chat:
+        options:
+          model: llama3.2
+
+server:
+  port: 8080
