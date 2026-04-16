@@ -5,18 +5,25 @@ spring:
     url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:mydb}
     username: ${POSTGRES_USER:admin}
     password: ${POSTGRES_PASSWORD:secret}
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        default_schema: shop
+  flyway:
+    enabled: false
   ai:
     ollama:
-      # Ollama sur Windows, Spring dans WSL : localhost WSL != Ollama ; IP hôte Windows (vEthernet).
-      # Surcharge : export OLLAMA_BASE_URL=http://<ip>:11434 si cette IP change au redemarrage.
+      # URL du serveur Ollama (API HTTP). Par défaut localhost — insuffisant si l'app est dans WSL2 et Ollama sur Windows.
+      # Exemple WSL2 → Windows : export OLLAMA_BASE_URL=http://$(awk '/nameserver/{print $2; exit}' /etc/resolv.conf):11434
       base-url: ${OLLAMA_BASE_URL:http://172.19.224.1:11434}
       chat:
         options:
           model: llama3.2
+          temperature: 0.1
 
 server:
   port: 8081
-
-app:
-  database:
-    schema: shop
