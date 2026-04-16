@@ -1,6 +1,10 @@
 spring:
   application:
     name: fantastic-journey
+  datasource:
+    url: jdbc:postgresql://${POSTGRES_HOST:localhost}:${POSTGRES_PORT:5432}/${POSTGRES_DB:mydb}
+    username: ${POSTGRES_USER:admin}
+    password: ${POSTGRES_PASSWORD:secret}
   ai:
     ollama:
       # Ollama sur Windows, Spring dans WSL : localhost WSL != Ollama ; IP hôte Windows (vEthernet).
@@ -11,4 +15,8 @@ spring:
           model: llama3.2
 
 server:
-  port: 8080
+  port: 8081
+
+app:
+  database:
+    schema: shop

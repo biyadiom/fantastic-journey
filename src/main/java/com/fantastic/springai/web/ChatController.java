@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ChatController {
 
     private final ChatClient chatClient;
-//test
+
     public ChatController(ChatClient.Builder chatClientBuilder) {
         this.chatClient = chatClientBuilder.build();
     }
